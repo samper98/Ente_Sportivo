@@ -98,7 +98,7 @@ public class StaffGaraServlet2EE extends HttpServlet {
 			elencoGare=testJdbcEnteSportivo.getGaraDao().loadGara();
 			request.setAttribute("listaGare", elencoGare);
 			// HttpSession httpSession = request.getSession(); 
-
+  System.out.println();
 		} catch (EnteSportivoModelException e) {
 			messageToShow = UserMessages.msgErroreVisualizzazioneLista;
 
