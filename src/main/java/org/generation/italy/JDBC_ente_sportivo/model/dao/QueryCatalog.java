@@ -38,7 +38,16 @@ public class QueryCatalog {
 			  " SELECT * " + 
 			  "FROM gara   ";
 	
+	public static final String selectFromGaraOrderByLuogo=
+			" SELECT *" +
+	        "  FROM gara " +
+		    " ORDER BY luogo" ;
 	
+	public static final String selectFromIscrizioneInnerJoinVelocista =
+			"SELECT velocista.nominativo, velocista.eta " +
+			 "FROM iscrizione " +
+			 "INNER JOIN velocista  ON iscrizione.codice_fiscale = velocista.codice_fiscale " +
+			 "WHERE iscrizione.id_gara = ? " ;
 	
 	
 	 /////////////////////////// INSERT ///////////////////////////

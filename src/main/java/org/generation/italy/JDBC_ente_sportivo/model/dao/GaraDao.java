@@ -115,6 +115,35 @@ public class GaraDao extends ADao {
 		return elencoGara;
 	}
 
+	
+	
+	public List<Gara> loadGaraOrderByLuogo() throws EnteSportivoModelException {
+
+		Gara Gara = null;
+
+		List<Gara> elencoGara = new ArrayList<Gara>();
+
+		try {
+
+			PreparedStatement preparedStatement = this.jdbcConnectionToDatabase
+					.prepareStatement(QueryCatalog.selectFromGaraOrderByLuogo);
+
+			elencoGara = loadGaraByQuery(preparedStatement);
+
+			if (elencoGara.size() == 1) {
+				Gara = elencoGara.get(0);
+
+			}
+
+		} catch (SQLException sqlException) {
+
+			throw new EnteSportivoModelException("GaraDao -> loadElencoGara -> " + sqlException.getMessage());
+		}
+
+		return elencoGara;
+	}
+	
+	
 	public void addGara(Gara gara) throws EnteSportivoModelException {
 
 		try {

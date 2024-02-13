@@ -16,7 +16,7 @@ import org.generation.italy.JDBC_ente_sportivo.model.entity.Gara;
 import org.generation.italy.JDBC_ente_sportivo.model1.EnteSportivoModelException;
 import org.generation.italy.JDBC_ente_sportivo.model1.TestJdbcEnteSportivo;
 
-@WebServlet(urlPatterns = {"/lista-gare"})
+@WebServlet(urlPatterns = {"/homepage-velocista","/lista-gare?ordinamento=asc"})
 public class StaffGaraServlet2EE extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -72,43 +72,52 @@ public class StaffGaraServlet2EE extends HttpServlet {
 			throws ServletException, IOException {
   
 		String actionName = request.getServletPath(); // parte action della URI: gestione della azione applicativa, la
-														// parte della URL dopo il nome della webapp...
+			System.out.println("Action name: " + actionName);											// parte della URL dopo il nome della webapp...
 
 		switch (actionName.toLowerCase().trim()) {
 
 		//http://localhost:8080/JDBCente_sportivo/lista-gare
-		case "/lista-gare":
-			   actionVisualizzaGare(request, response);
+		case "/homepage-velocista":
+			   actionHomePageVelocista(request, response);
+			   
 			  // System.out.println("Azione intereccettata");
 			break;
-
+	
 		default:
 			;
 		}
 
 	}
 
-	private void actionVisualizzaGare(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	private void actionHomePageVelocista(HttpServletRequest request, HttpServletResponse response)
+	        throws ServletException, IOException {
 
-		String messageToShow = UserMessages.msgEsitoOkVisualizzazioneLista;
-		List<Gara> elencoGare = new ArrayList<>();
-		try {
-			TestJdbcEnteSportivo testJdbcEnteSportivo = new TestJdbcEnteSportivo();
-			elencoGare=testJdbcEnteSportivo.getGaraDao().loadGara();
-			request.setAttribute("listaGare", elencoGare);
-			// HttpSession httpSession = request.getSession(); 
-  System.out.println();
-		} catch (EnteSportivoModelException e) {
-			messageToShow = UserMessages.msgErroreVisualizzazioneLista;
+	    String messageToShow = UserMessages.msgEsitoOkVisualizzazioneLista;
+	    String ordina = request.getParameter("ordinamento");
+	    List<Gara> elencoGare = new ArrayList<>();
 
-		}
-        RequestDispatcher dispatcher = request.getRequestDispatcher("lista-gara.jsp");
-        //ottiene il riferimento alla apgina JSP
-        dispatcher.forward(request, response);
+	    try {
+	        TestJdbcEnteSportivo testJdbcEnteSportivo = new TestJdbcEnteSportivo();
+	        if (ordina == null) {
+	            elencoGare = testJdbcEnteSportivo.getGaraDao().loadGara();
+	        } else if ("asc".equals(ordina)) {
+	            elencoGare = testJdbcEnteSportivo.getGaraDao().loadGaraOrderByLuogo();
+	        } else {
+	            elencoGare = testJdbcEnteSportivo.getGaraDao().loadGara();
+	        }
+	        request.setAttribute("listaGare", elencoGare);
+	        // HttpSession httpSession = request.getSession();
+	    } catch (EnteSportivoModelException e) {
+	        messageToShow = UserMessages.msgErroreVisualizzazioneLista;
+	    }
 
-		
+	    RequestDispatcher dispatcher = request.getRequestDispatcher("homepage-velocista.jsp");
+	    // ottiene il riferimento alla pagina JSP
+	    dispatcher.forward(request, response);
 	}
+	
+	
+	
 }
 
 
