@@ -10,13 +10,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.generation.italy.JDBC_ente_sportivo.model.entity.Gara;
+import org.generation.italy.JDBC_ente_sportivo.model.entity.Partecipazione;
 import org.generation.italy.JDBC_ente_sportivo.model1.EnteSportivoModelException;
 import org.generation.italy.JDBC_ente_sportivo.model1.TestJdbcEnteSportivo;
 
-@WebServlet(urlPatterns = {"/homepage-velocista","/lista-gare?ordinamento=asc"})
+@WebServlet(urlPatterns = {"/homepage-velocista","/visualizza-dettaglio"})
 public class StaffGaraServlet2EE extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -54,6 +54,7 @@ public class StaffGaraServlet2EE extends HttpServlet {
 																					// (browser)
 			throws ServletException, IOException {
 		System.out.println("DO GET ENTRATO");
+		System.out.println(request.getServletPath());
 		executeAction(request, response); // re-inoltra al metodo doGet la gestione della action | request e response
 											// sono istanze di tipo HttpServletRequest ed HttpServletResponse, create
 											// dal container per fornire a e ricevere dalla servlet i dettagli circa i
@@ -79,10 +80,13 @@ public class StaffGaraServlet2EE extends HttpServlet {
 		//http://localhost:8080/JDBCente_sportivo/lista-gare
 		case "/homepage-velocista":
 			   actionHomePageVelocista(request, response);
-			   
+		
 			  // System.out.println("Azione intereccettata");
 			break;
-	
+		case "/visualizza-dettaglio":
+			 System.out.println("Azione intercettata");
+			 actionVisualizzaDettaglioGarePartecipate(request, response);
+			 break;
 		default:
 			;
 		}
@@ -94,8 +98,9 @@ public class StaffGaraServlet2EE extends HttpServlet {
 
 	    String messageToShow = UserMessages.msgEsitoOkVisualizzazioneLista;
 	    String ordina = request.getParameter("ordinamento");
+	    
 	    List<Gara> elencoGare = new ArrayList<>();
-
+   
 	    try {
 	        TestJdbcEnteSportivo testJdbcEnteSportivo = new TestJdbcEnteSportivo();
 	        if (ordina == null) {
@@ -116,6 +121,51 @@ public class StaffGaraServlet2EE extends HttpServlet {
 	    dispatcher.forward(request, response);
 	}
 	
+	
+	private void actionVisualizzaDettaglioGarePartecipate (HttpServletRequest request, HttpServletResponse response)
+	        throws ServletException, IOException { 
+		String messageToShow = UserMessages.msgEsitoOkVisualizzazioneLista;
+		 //  String visualizza = request.getParameter("visualizza-dettagli");
+		   Long id = Long.parseLong(request.getParameter("id"));  // get0 parameter ti salva la vita , getParameter lavora sui tipi di stringhe
+		   System.out.println("Id gara" + id);
+		   List<Partecipazione> elencoPartecipanti = new ArrayList<>();
+		   try {
+			   TestJdbcEnteSportivo testJdbcEnteSportivo = new TestJdbcEnteSportivo();
+			   elencoPartecipanti = testJdbcEnteSportivo.getPartecipazioneDao().loadGarePartecipate(id);
+			   
+			   request.setAttribute("listaPartecipanti", elencoPartecipanti);  // ASSOCIARE E LAVORARE CON JSTL SU L'APPOSITA PAGINA JSP
+			   
+		   }catch (EnteSportivoModelException e) {
+		        messageToShow = UserMessages.msgErroreVisualizzazioneListaPartecipanti;
+	}
+		   RequestDispatcher dispatcher = request.getRequestDispatcher("visualizza-dettaglio.jsp");
+		    // ottiene il riferimento alla pagina JSP
+		    dispatcher.forward(request, response);
+		   
+	}
+	
+	/*
+	private void actionVisualizzaIscritte(HttpServletRequest request, HttpServletResponse response)
+	        throws ServletException, IOException { 
+		String messageToShow = UserMessages.msgEsitoOkVisualizzazioneLista;
+		   String iscritti = request.getParameter("visualizza-iscritti");
+		   
+		   List<Iscrizione> elencoIscritti = new ArrayList<>();
+		   try {
+			   TestJdbcEnteSportivo testJdbcEnteSportivo = new TestJdbcEnteSportivo();
+			   elencoIscritti = testJdbcEnteSportivo.getIscrizioneDao().loadListaIscrittiGara();
+			   
+			   request.setAttribute("listaIscritti", elencoIscritti);
+			   
+		   }catch (EnteSportivoModelException e) {
+		        messageToShow = UserMessages.msgErroreVisualizzazioneListaIscritti;
+	}
+		   RequestDispatcher dispatcher = request.getRequestDispatcher("elencoIscritti.jsp");
+		    // ottiene il riferimento alla pagina JSP
+		    dispatcher.forward(request, response);
+		   
+	}
+	*/
 	
 	
 }

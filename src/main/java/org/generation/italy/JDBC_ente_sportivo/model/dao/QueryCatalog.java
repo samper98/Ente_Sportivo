@@ -50,6 +50,14 @@ public class QueryCatalog {
 			 "WHERE iscrizione.id_gara = ? " ;
 	
 	
+	
+	public static final String selectFromPartecipazioneInnerJoinVelocista =
+			"SELECT velocista.nominativo, velocista.eta " +
+			 "FROM partecipazione " +
+			 "INNER JOIN velocista  ON partecipazione.codice_fiscale = velocista.codice_fiscale " +
+			 "INNER JOIN gara ON partecipazione.id_gara = gara.id_gara" +
+			 "WHERE gara.id_gara = ? " ;
+	
 	 /////////////////////////// INSERT ///////////////////////////
 	
 	public static final String insertGara = 

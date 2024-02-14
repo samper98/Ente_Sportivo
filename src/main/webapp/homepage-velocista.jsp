@@ -31,6 +31,10 @@
 		<a class="btn btn-success"
 			href="/JDBCente_sportivo/homepage-velocista?ordinamento=asc">  
 			 </a>
+	 Ordina per ID 
+	 <a class="btn btn-success " style="background-color:  #ffffcc;"
+			href="/JDBCente_sportivo/homepage-velocista">  
+			 </a>
 	</div>
 	<caption>
 		<h2>Lista Gare Svolte</h2>
@@ -54,7 +58,7 @@
 						<td><c:out value="${gara.luogo}" /></td>
 						<td><c:out value="${gara.dataGara}" /></td>
 						<td> </td>
-						<td><a class="btn btn-success"> Visualizza Dettaglio</a></td>
+						<td><a class="btn btn-success"  href=/JDBCente_sportivo/visualizza-dettaglio?id=<c:out value="${gara.idGara}" />>Visualizza Dettaglio</a></td>
 					</tr>
 				</c:if>
 			</c:forEach>
@@ -83,7 +87,8 @@
 						<td><c:out value="${gara.idGara}" /></td>
 						<td><c:out value="${gara.luogo}" /></td>
 						<td><c:out value="${gara.dataGara}" /></td>
-						<td><a class="btn btn-success"> Visualizza Iscritti</a></td>
+						<td><a class="btn btn-success">
+						  Visualizza Iscritti</a></td>
 						<td><a class="btn btn-success"> Iscriviti </a></td>
 					</tr>
 				</c:if>

@@ -10,6 +10,8 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.generation.italy.JDBC_ente_sportivo.model.entity.Gara;
 import org.generation.italy.JDBC_ente_sportivo.model.entity.Iscrizione;
 import org.generation.italy.JDBC_ente_sportivo.model1.EnteSportivoModelException;
 
@@ -88,7 +90,38 @@ public class IscrizioneDao extends ADao {
 
 		return Iscrizione;
 	}
+    public List<Iscrizione> loadListaIscrittiGara(Long idGara) throws EnteSportivoModelException {
+         Iscrizione iscrizione = null;
 
+		List<Iscrizione> elencoIscrizioni = new ArrayList<Iscrizione>();
+
+		try {
+           
+			PreparedStatement preparedStatement = this.jdbcConnectionToDatabase
+					.prepareStatement(QueryCatalog.selectFromIscrizioneInnerJoinVelocista);
+			
+			preparedStatement.setLong(1, idGara);
+
+			
+			elencoIscrizioni = loadIscrizioneByQuery(preparedStatement);
+
+			if (elencoIscrizioni.size() == 1) {
+				iscrizione = elencoIscrizioni.get(0);
+
+			}
+
+		} catch (SQLException sqlException) {
+
+			throw new EnteSportivoModelException("IscrizioneDao -> loadIscrizioneDaoByInnerJoin -> " + sqlException.getMessage());
+		}
+
+		return elencoIscrizioni;
+	}
+	
+    
+    
+	
+	
 	public void addIscrizione(Iscrizione iscrizione) throws EnteSportivoModelException {
 
 		try {

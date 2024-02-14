@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.generation.italy.JDBC_ente_sportivo.model.entity.Iscrizione;
 import org.generation.italy.JDBC_ente_sportivo.model.entity.Partecipazione;
 import org.generation.italy.JDBC_ente_sportivo.model1.EnteSportivoModelException;
 
@@ -53,5 +54,33 @@ public class PartecipazioneDao extends ADao {
 		return elencoPartecipazione;
 
 	}
+	 public List<Partecipazione> loadGarePartecipate(Long idGara) throws EnteSportivoModelException {
+         Partecipazione partecipazione = null;
+
+		List<Partecipazione> elencoPartecipazione = new ArrayList<Partecipazione>();
+
+		try {
+           
+			PreparedStatement preparedStatement = this.jdbcConnectionToDatabase
+					.prepareStatement(QueryCatalog.selectFromPartecipazioneInnerJoinVelocista);
+			
+			preparedStatement.setLong(1, idGara);
+
+			
+			elencoPartecipazione = loadPartecipazioneByQuery(preparedStatement);
+
+			if (elencoPartecipazione.size() == 1) {
+				partecipazione = elencoPartecipazione.get(0);
+
+			}
+
+		} catch (SQLException sqlException) {
+
+			throw new EnteSportivoModelException("PartecipazioneDao -> loadPartecipazioneInnerJoinVelocista -> " + sqlException.getMessage());
+		}
+
+		return elencoPartecipazione;
+	}
+	
 }
 
