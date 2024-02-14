@@ -22,7 +22,7 @@
 	</caption>
 	<div align="center">
 		<table class="table" border="1" cellpadding="5">
-
+         
 			<tr>
 				<th></th>
 				<th>Nominativo</th>

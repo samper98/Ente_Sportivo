@@ -56,7 +56,7 @@ public class QueryCatalog {
 			 "FROM partecipazione " +
 			 "INNER JOIN velocista  ON partecipazione.codice_fiscale = velocista.codice_fiscale " +
 			 "INNER JOIN gara ON partecipazione.id_gara = gara.id_gara" +
-			 "WHERE gara.id_gara = ? " ;
+			 " WHERE gara.id_gara =? " ;
 	
 	 /////////////////////////// INSERT ///////////////////////////
 	
@@ -67,7 +67,7 @@ public class QueryCatalog {
 			" INSERT INTO velocista (nominativo, eta, codice_fiscale, altezza, peso) VALUES (?, ?, ?, ?, ?) ";
 	
 	public static final String insertIscrizione = 
-			" INSERT INTO iscrizione (data_iscrizione, codice_fiscale, id_gara) VALUES (?, ?, ?) ";
+			" INSERT INTO iscrizione (data_iscrizione, codice_fiscale, id_gara) VALUES (NOW(), ?, ?) ";
 	
 	public static final String insertPartecipazione = 
 			" INSERT INTO partecipazione (tempo, codice_fiscale, id_gara) VALUES (?, ?, ?) ";

@@ -45,8 +45,9 @@ public class PartecipazioneDao extends ADao {
 			}
 
 		} catch (SQLException sqlException) {
-
+             System.out.println("errore " + sqlException.getMessage());
 			throw new EnteSportivoModelException("PartecipazioneDao ===> loadPartecipazione" + sqlException.getMessage());
+			
 			// normalizzazione dell'eccezione SQLException
 
 		}
@@ -54,6 +55,7 @@ public class PartecipazioneDao extends ADao {
 		return elencoPartecipazione;
 
 	}
+	
 	 public List<Partecipazione> loadGarePartecipate(Long idGara) throws EnteSportivoModelException {
          Partecipazione partecipazione = null;
 
@@ -63,6 +65,8 @@ public class PartecipazioneDao extends ADao {
            
 			PreparedStatement preparedStatement = this.jdbcConnectionToDatabase
 					.prepareStatement(QueryCatalog.selectFromPartecipazioneInnerJoinVelocista);
+			
+			System.out.println(QueryCatalog.selectFromPartecipazioneInnerJoinVelocista);
 			
 			preparedStatement.setLong(1, idGara);
 

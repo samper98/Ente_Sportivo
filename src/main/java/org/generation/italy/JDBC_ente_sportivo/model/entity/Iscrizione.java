@@ -23,6 +23,12 @@ public class Iscrizione {
 		this.codiceFiscale = codiceFiscale;
 		this.dataOraIscrizione = dataIscrizione;
 	}
+ 
+	public Iscrizione(String codiceFiscale, Long idGara) {
+		super();
+		this.codiceFiscale = codiceFiscale;
+		this.idGara = idGara;
+	}
 
 	public String getCodiceFiscale() {
 		return codiceFiscale;

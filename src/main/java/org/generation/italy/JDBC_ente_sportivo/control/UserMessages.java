@@ -8,6 +8,10 @@ public class UserMessages {
 	                                /////////ISCRIZIONE
 	public static final String msgErroreVisualizzazioneListaIscritti = "Errore nella visualizzazione della lista degli iscritti";
 
-    public static final String msgErroreVisualizzazioneListaPartecipanti = "Errore nella visualizzazione della lista partecipanti";
+
+	public static final String msgErroreVisualizzazioneListaPartecipanti = "Errore nella visualizzazione della lista partecipanti";
+   
+	public static final String msgEsitoOkIscrizione ="Iscrizione effettuata";
+	public static final String msgErroreIscrizione =" Errore nei dati inseriti";
 }
 ///

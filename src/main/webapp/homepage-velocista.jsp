@@ -89,7 +89,7 @@
 						<td><c:out value="${gara.dataGara}" /></td>
 						<td><a class="btn btn-success">
 						  Visualizza Iscritti</a></td>
-						<td><a class="btn btn-success"> Iscriviti </a></td>
+						<td><a class="btn btn-success" href=/JDBCente_sportivo/form-iscrizione?id=<c:out value="${gara.idGara}" />> Iscriviti </a></td>
 					</tr>
 				</c:if>
 			</c:forEach>
