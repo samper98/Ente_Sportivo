@@ -129,7 +129,7 @@ public class IscrizioneDao extends ADao {
 			PreparedStatement preparedStatement = this.jdbcConnectionToDatabase
 					.prepareStatement(QueryCatalog.insertIscrizione);
 
-			preparedStatement.setTimestamp(1,Timestamp.valueOf(iscrizione.getDataOraIscrizione()));
+		//	preparedStatement.setTimestamp(1,Timestamp.valueOf(iscrizione.getDataOraIscrizione()));
 			preparedStatement.setString(2, iscrizione.getCodiceFiscale());
 			preparedStatement.setLong(3, iscrizione.getIdGara());
 

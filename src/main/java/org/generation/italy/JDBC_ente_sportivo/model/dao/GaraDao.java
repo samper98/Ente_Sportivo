@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.generation.italy.JDBC_ente_sportivo.model.entity.Gara;
+import org.generation.italy.JDBC_ente_sportivo.model.entity.Velocista;
 import org.generation.italy.JDBC_ente_sportivo.model1.EnteSportivoModelException;
 
 public class GaraDao extends ADao {
@@ -142,6 +143,40 @@ public class GaraDao extends ADao {
 
 		return elencoGara;
 	}
+	
+	
+	
+	 public List<Gara> loadGarePartecipate(Long idGara) throws EnteSportivoModelException {
+         Gara gara = null;
+
+		List<Gara> elencoVelocisti = new ArrayList<Gara>();
+
+		try {
+           
+			PreparedStatement preparedStatement = this.jdbcConnectionToDatabase
+					.prepareStatement(QueryCatalog.selectFromPartecipazioneInnerJoinVelocista);
+			
+			System.out.println(QueryCatalog.selectFromPartecipazioneInnerJoinVelocista);
+			
+			preparedStatement.setLong(1, idGara);
+
+			
+			elencoVelocisti = loadGaraByQuery(preparedStatement);
+
+			if (elencoVelocisti.size() == 1) {
+				gara = elencoVelocisti.get(0);
+
+			}
+
+		} catch (SQLException sqlException) {
+
+			throw new EnteSportivoModelException("VelocistaDao -> loadVelocistaInnerJoin -> " + sqlException.getMessage());
+		}
+
+		return elencoVelocisti;
+	}
+	
+	
 	
 	
 	public void addGara(Gara gara) throws EnteSportivoModelException {

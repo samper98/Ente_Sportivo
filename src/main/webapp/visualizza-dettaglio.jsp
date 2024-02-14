@@ -22,7 +22,9 @@
 	</caption>
 	<div align="center">
 		<table class="table" border="1" cellpadding="5">
-         
+		
+          <c:set var="idgara" value='${requestScope["id-gara"]}' />    
+	       c:out value="${idgara}"
 			<tr>
 				<th></th>
 				<th>Nominativo</th>
