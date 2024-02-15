@@ -23,7 +23,7 @@
             <h1> Iscrizione Gara </h1>
         </center>
 		
-		<form action="/JDBCEnte_Sportivo/iscrizione" method="post">
+		<form action="/ente-sportivo/iscrizione" method="post">
 		
 			<p>Per favore, indicare i dati per svolgere la gara  !!!.</p>
 			

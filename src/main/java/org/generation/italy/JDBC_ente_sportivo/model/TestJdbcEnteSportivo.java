@@ -1,4 +1,4 @@
-package org.generation.italy.JDBC_ente_sportivo.model1;
+package org.generation.italy.JDBC_ente_sportivo.model;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

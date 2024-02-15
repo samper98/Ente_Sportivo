@@ -18,23 +18,19 @@
 <title>Lista Gare</title>
 </head>
 
-<body>
+<body >
 	<div class="conteiner" align="right">
-		<img src="img/maratona.jpg" width="500" height="200" align ="right"> 
+		<img src="img/maratona.jpg" width="500" height="200" align="right">
 		<img src="img/maratona3.jpg" width="465" height="200" align="center">
 		<img src="img/maratona2.jpg" width="500" height="200" align="left">
-		
+
 	</div>
 
 	<div class="conteiner" align="left">
-	 Ordina per Luogo 
-		<a class="btn btn-success"
-			href="/JDBCente_sportivo/homepage-velocista?ordinamento=asc">  
-			 </a>
-	 Ordina per ID 
-	 <a class="btn btn-success " style="background-color:  #ffffcc;"
-			href="/JDBCente_sportivo/homepage-velocista">  
-			 </a>
+		Ordina per Luogo <a class="btn btn-success"
+			href="/ente-sportivo/homepage-velocista?ordinamento=asc"> </a> Ordina
+		per ID <a class="btn btn-success " style="background-color: #ffffcc;"
+			href="/ente-sportivo/homepage-velocista"> </a>
 	</div>
 	<caption>
 		<h2>Lista Gare Svolte</h2>
@@ -46,8 +42,8 @@
 				<th>ID</th>
 				<th>Luogo</th>
 				<th>Data e Ora</th>
-				<th> Tempo </th>
-				<th> Visualizza Dettagli </th>
+				<th>Tempo</th>
+				<th>Visualizza Dettagli</th>
 			</tr>
 
 			<c:set var="today" value="<%= LocalDateTime.now() %>" />
@@ -57,8 +53,10 @@
 						<td><c:out value="${gara.idGara}" /></td>
 						<td><c:out value="${gara.luogo}" /></td>
 						<td><c:out value="${gara.dataGara}" /></td>
-						<td> </td>
-						<td><a class="btn btn-success"  href=/JDBCente_sportivo/visualizza-dettaglio?id=<c:out value="${gara.idGara}" />>Visualizza Dettaglio</a></td>
+						<td></td>
+						<td><a class="btn btn-success"
+							href="/ente-sportivo/visualizza-dettaglio?id=
+							<c:out value="${gara.idGara}" />">Visualizza Dettaglio</a></td>
 					</tr>
 				</c:if>
 			</c:forEach>
@@ -87,17 +85,22 @@
 						<td><c:out value="${gara.idGara}" /></td>
 						<td><c:out value="${gara.luogo}" /></td>
 						<td><c:out value="${gara.dataGara}" /></td>
-						<td><a class="btn btn-success">
-						  Visualizza Iscritti</a></td>
-						<td><a class="btn btn-success" href=/JDBCente_sportivo/form-iscrizione?id=<c:out value="${gara.idGara}" />> Iscriviti </a></td>
+						<td><a class="btn btn-success"> Visualizza Iscritti</a></td>
+						<td><a class="btn btn-success"
+							href="/ente-sportivo/form-iscrizione?id-gara=
+							<c:out value='${gara.idGara}' />"> Iscriviti </a></td>
+							
 					</tr>
 				</c:if>
 			</c:forEach>
 		</table>
 	</div>
+</head>
+
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
 		integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
 		crossorigin="anonymous"></script>
+
 </body>
 </html>

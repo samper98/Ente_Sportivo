@@ -7,9 +7,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.generation.italy.JDBC_ente_sportivo.model.EnteSportivoModelException;
 import org.generation.italy.JDBC_ente_sportivo.model.entity.Iscrizione;
 import org.generation.italy.JDBC_ente_sportivo.model.entity.Partecipazione;
-import org.generation.italy.JDBC_ente_sportivo.model1.EnteSportivoModelException;
 
 public class PartecipazioneDao extends ADao {
 

@@ -11,12 +11,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.generation.italy.JDBC_ente_sportivo.model.EnteSportivoModelException;
+import org.generation.italy.JDBC_ente_sportivo.model.TestJdbcEnteSportivo;
 import org.generation.italy.JDBC_ente_sportivo.model.entity.Gara;
 import org.generation.italy.JDBC_ente_sportivo.model.entity.Iscrizione;
 import org.generation.italy.JDBC_ente_sportivo.model.entity.Partecipazione;
 import org.generation.italy.JDBC_ente_sportivo.model.entity.Velocista;
-import org.generation.italy.JDBC_ente_sportivo.model1.EnteSportivoModelException;
-import org.generation.italy.JDBC_ente_sportivo.model1.TestJdbcEnteSportivo;
 
 @WebServlet(urlPatterns = { "/homepage-velocista", "/visualizza-dettaglio", "/form-iscrizione", "/iscrizione"})
 public class StaffGaraServlet2EE extends HttpServlet {
@@ -98,6 +98,7 @@ public class StaffGaraServlet2EE extends HttpServlet {
 		case "/iscrizione":
 			System.out.println("azione"+ actionName);
 			actionIscrizione(request, response);
+			
 			break;
 		default:
 			;
@@ -184,7 +185,7 @@ public class StaffGaraServlet2EE extends HttpServlet {
 	public void actionIscrizione(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String messageToShow = UserMessages.msgEsitoOkIscrizione;
-		Long id = Long.parseLong(request.getParameter("id")); // get0 parameter ti salva la vita , getParameter lavora
+		Long id = Long.parseLong(request.getParameter("id-gara")); // get0 parameter ti salva la vita , getParameter lavora
 																// sui tipi di stringhe
 		System.out.println("Id gara" + id);
 		// String dataOraIscrizioneString = request.getParameter("data_iscrizione") !=
@@ -220,8 +221,9 @@ public class StaffGaraServlet2EE extends HttpServlet {
 
 	private static void actionFormIscrizione(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		Long id = Long.parseLong(request.getParameter("id-gara"));
 		// throws BancaControlException, BancaModelException {
-		Long id = Long.parseLong(request.getParameter("id"));
+		
 		request.setAttribute("id-gara", id);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("form-iscrizione.jsp");
 		// ottiene il riferimento alla pagina JSP

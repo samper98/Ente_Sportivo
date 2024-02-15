@@ -4,7 +4,8 @@ package org.generation.italy.JDBC_ente_sportivo.model.entity;
 import java.time.LocalDateTime;
 
 public class Iscrizione {
-
+  
+	
 	private String codiceFiscale;
 
 	private Long idGara;
@@ -13,9 +14,11 @@ public class Iscrizione {
 
 	public Iscrizione(String codiceFiscale, Long idGara, LocalDateTime dataOraIscrizione) {
 		super();
+		
 		this.codiceFiscale = codiceFiscale;
 		this.idGara = idGara;
 		this.dataOraIscrizione = dataOraIscrizione;
+		
 	}
 
 	public Iscrizione(String codiceFiscale, LocalDateTime dataIscrizione) {
@@ -47,5 +50,6 @@ public class Iscrizione {
 		return "Iscrizione [codiceFiscale=" + codiceFiscale + ", idGara=" + idGara + ", dataIscrizione="
 				+ dataOraIscrizione + "]";
 	}
+
 
 }
