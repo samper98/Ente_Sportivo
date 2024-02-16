@@ -8,6 +8,7 @@ public class Partecipazione {
 
 	private Float tempo;
 
+	
 	public Partecipazione(String codiceFiscale, Long idGara, Float tempo) {
 		super();
 		this.codiceFiscale = codiceFiscale;

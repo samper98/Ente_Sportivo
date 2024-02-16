@@ -55,7 +55,7 @@ public class VelocistaDao extends ADao {
 
 				Velocista velocista = new Velocista(codiceFiscale, nominativo, eta, altezza, peso);
 				elencoVelocista.add(velocista);
-
+        
 			}
 
 		} catch (SQLException sqlException) {
@@ -97,35 +97,6 @@ public class VelocistaDao extends ADao {
 		return velocista;
 	}
 
-	 public List<Velocista> loadGarePartecipate(Long idGara) throws EnteSportivoModelException {
-         Velocista velocista = null;
-
-		List<Velocista> elencoVelocisti = new ArrayList<Velocista>();
-
-		try {
-           
-			PreparedStatement preparedStatement = this.jdbcConnectionToDatabase
-					.prepareStatement(QueryCatalog.selectFromPartecipazioneInnerJoinVelocista);
-			
-			System.out.println(QueryCatalog.selectFromPartecipazioneInnerJoinVelocista);
-			
-			preparedStatement.setLong(1, idGara);
-
-			
-			elencoVelocisti = loadVelocistaByQuery(preparedStatement);
-
-			if (elencoVelocisti.size() == 1) {
-				velocista = elencoVelocisti.get(0);
-
-			}
-
-		} catch (SQLException sqlException) {
-
-			throw new EnteSportivoModelException("VelocistaDao -> loadVelocistaInnerJoin -> " + sqlException.getMessage());
-		}
-
-		return elencoVelocisti;
-	}
 	
 	
 	

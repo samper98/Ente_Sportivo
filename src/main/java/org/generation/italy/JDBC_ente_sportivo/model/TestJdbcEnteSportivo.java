@@ -8,7 +8,9 @@ import java.util.List;
 import org.generation.italy.JDBC_ente_sportivo.model.dao.GaraDao;
 import org.generation.italy.JDBC_ente_sportivo.model.dao.IscrizioneDao;
 import org.generation.italy.JDBC_ente_sportivo.model.dao.PartecipazioneDao;
+import org.generation.italy.JDBC_ente_sportivo.model.dao.Trigger;
 import org.generation.italy.JDBC_ente_sportivo.model.dao.VelocistaDao;
+
 
 
 
@@ -33,6 +35,12 @@ public class TestJdbcEnteSportivo {
 		this.partecipazioneDao = new PartecipazioneDao(this.dbConnection);
 
 		// richiamare trigger
+		
+      Trigger.garaDao = this.garaDao;
+      Trigger.velocistaDao= this.velocistaDao;
+      Trigger.iscrizioneDao = this.iscrizioneDao;
+      Trigger.partecipazioneDao= this.partecipazioneDao;
+		
 
 	}
 

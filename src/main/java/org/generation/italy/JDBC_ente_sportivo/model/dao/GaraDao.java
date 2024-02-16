@@ -145,37 +145,37 @@ public class GaraDao extends ADao {
 	}
 	
 	
-	
-	 public List<Gara> loadGarePartecipate(Long idGara) throws EnteSportivoModelException {
-         Gara gara = null;
-
-		List<Gara> elencoVelocisti = new ArrayList<Gara>();
-
-		try {
-           
-			PreparedStatement preparedStatement = this.jdbcConnectionToDatabase
-					.prepareStatement(QueryCatalog.selectFromPartecipazioneInnerJoinVelocista);
-			
-			System.out.println(QueryCatalog.selectFromPartecipazioneInnerJoinVelocista);
-			
-			preparedStatement.setLong(1, idGara);
-
-			
-			elencoVelocisti = loadGaraByQuery(preparedStatement);
-
-			if (elencoVelocisti.size() == 1) {
-				gara = elencoVelocisti.get(0);
-
-			}
-
-		} catch (SQLException sqlException) {
-
-			throw new EnteSportivoModelException("VelocistaDao -> loadVelocistaInnerJoin -> " + sqlException.getMessage());
-		}
-
-		return elencoVelocisti;
-	}
-	
+//	
+//	 public List<Gara> loadVelocistiPartecipanti(Long idGara) throws EnteSportivoModelException {
+//         Gara gara = null;
+//
+//		List<Gara> elencoVelocisti = new ArrayList<Gara>();
+//
+//		try {
+//           
+//			PreparedStatement preparedStatement = this.jdbcConnectionToDatabase
+//					.prepareStatement(QueryCatalog.selectFromPartecipazioneInnerJoinVelocista);
+//			
+//			System.out.println(QueryCatalog.selectFromPartecipazioneInnerJoinVelocista);
+//			
+//			preparedStatement.setLong(1, idGara);
+//
+//			
+//			elencoVelocisti = loadGaraByQuery(preparedStatement);
+//
+//			if (elencoVelocisti.size() == 1) {
+//				gara = elencoVelocisti.get(0);
+//
+//			}
+//
+//		} catch (SQLException sqlException) {
+//
+//			throw new EnteSportivoModelException("VelocistaDao -> loadVelocistaInnerJoin -> " + sqlException.getMessage());
+//		}
+//
+//		return elencoVelocisti;
+//	}
+//	
 	
 	
 	

@@ -10,6 +10,8 @@ import java.util.List;
 import org.generation.italy.JDBC_ente_sportivo.model.EnteSportivoModelException;
 import org.generation.italy.JDBC_ente_sportivo.model.entity.Iscrizione;
 import org.generation.italy.JDBC_ente_sportivo.model.entity.Partecipazione;
+import org.generation.italy.JDBC_ente_sportivo.model.entity.Velocista;
+import org.generation.italy.JDBC_ente_sportivo.model.entity.VelocistaPartecipanteGara;
 
 public class PartecipazioneDao extends ADao {
 
@@ -56,34 +58,60 @@ public class PartecipazioneDao extends ADao {
 
 	}
 	
-	 public List<Partecipazione> loadGarePartecipate(Long idGara) throws EnteSportivoModelException {
-         Partecipazione partecipazione = null;
 
-		List<Partecipazione> elencoPartecipazione = new ArrayList<Partecipazione>();
+	 public List<VelocistaPartecipanteGara> loadVelocistiPartecipantiGara(Long idGara) throws EnteSportivoModelException {
+        Velocista velocista = null;
+
+		List<VelocistaPartecipanteGara> elencoVelocistiPartecipantiGara = new ArrayList<VelocistaPartecipanteGara>();
 
 		try {
-           
+          
 			PreparedStatement preparedStatement = this.jdbcConnectionToDatabase
 					.prepareStatement(QueryCatalog.selectFromPartecipazioneInnerJoinVelocista);
 			
-			System.out.println(QueryCatalog.selectFromPartecipazioneInnerJoinVelocista);
+			
 			
 			preparedStatement.setLong(1, idGara);
+			
+			System.out.println(QueryCatalog.selectFromPartecipazioneInnerJoinVelocista);
+			
+			ResultSet rsSelect = preparedStatement.executeQuery();
+
+			while (rsSelect.next()) {  // usare per due metodi 
+
+				
+				Integer eta = rsSelect.getInt("eta");
+				if (rsSelect.wasNull()) {
+					eta = 0;
+				}
+
+				
+				
+				Float tempo = rsSelect.getFloat("tempo");
+				if (rsSelect.wasNull()) {
+					tempo = 0f;
+				}
+
+				String nominativo = rsSelect.getString("nominativo");
+				if (rsSelect.wasNull()) {
+					nominativo = "";
+
+				}
+										
+				
+			
+		//	elencoVelocistiPartecipantiGara = loadVelocistaByQuery(preparedStatement);
 
 			
-			elencoPartecipazione = loadPartecipazioneByQuery(preparedStatement);
-
-			if (elencoPartecipazione.size() == 1) {
-				partecipazione = elencoPartecipazione.get(0);
 
 			}
 
 		} catch (SQLException sqlException) {
 
-			throw new EnteSportivoModelException("PartecipazioneDao -> loadPartecipazioneInnerJoinVelocista -> " + sqlException.getMessage());
+			throw new EnteSportivoModelException("VelocistaDao -> loadVelocistaInnerJoin -> " + sqlException.getMessage());
 		}
 
-		return elencoPartecipazione;
+		return elencoVelocistiPartecipantiGara;
 	}
 	
 }

@@ -24,16 +24,18 @@
 		<table class="table" border="1" cellpadding="5">
 		
           <c:set var="idgara" value='${requestScope["id-gara"]}' />    
-	       c:out value="${idgara}"
+	     
 			<tr>
 				<th></th>
 				<th>Nominativo</th>
 				<th>Eta</th>
+			    <th>Tempo</th>	
 			</tr>
-			<c:forEach var="gara" items="${listaPartecipanti}">
+			<c:forEach var="VelocistaPartecipantiGara" items="${listaPartecipanti}">
 					<tr>
-						<td><c:out value="${velocista.nominativo}" /></td>
-						<td><c:out value="${velocista.eta}" /></td>
+						<td><c:out value="${VelocistaPartecipanteGara.nominativo}" /></td>
+						<td><c:out value="${VelocistaPartecipanteGara.eta}" /></td>
+						<td><c:out value="${VelocistaPartecipanteGara.tempo}" /></td>
 						
 					</tr>
 			</c:forEach>

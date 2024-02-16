@@ -64,13 +64,13 @@ public class IscrizioneDao extends ADao {
 
 	}
 
-	public Iscrizione loadIscrizioneByIdGara(Long idGara) throws EnteSportivoModelException {
+	public List <Iscrizione> loadIscrizioneByIdGara(Long idGara) throws EnteSportivoModelException {
 
-		Iscrizione Iscrizione = null;
-
+		
+		List<Iscrizione> elencoIscrizione = new ArrayList<Iscrizione>();
 		try {
 
-			List<Iscrizione> elencoIscrizione = new ArrayList<Iscrizione>();
+	
 
 			PreparedStatement preparedStatement = this.jdbcConnectionToDatabase
 					.prepareStatement(QueryCatalog.selectFromIscrizioneByIdGara);
@@ -79,16 +79,13 @@ public class IscrizioneDao extends ADao {
 
 			elencoIscrizione = loadIscrizioneByQuery(preparedStatement);
 
-			if (elencoIscrizione.size() == 1) {
-				Iscrizione = elencoIscrizione.get(0);
-			}
-
+		
 		} catch (SQLException sqlException) {
 
 			throw new EnteSportivoModelException("IscrizioneDao -> loadIscrizioneByIdGara -> " + sqlException.getMessage());
 		}
 
-		return Iscrizione;
+		return elencoIscrizione;
 	}
     public List<Iscrizione> loadListaIscrittiGara(Long idGara) throws EnteSportivoModelException {
          Iscrizione iscrizione = null;
@@ -119,13 +116,32 @@ public class IscrizioneDao extends ADao {
 	}
 	
     
+    public void loadIscrizioniSvolte(String CodiceFiscale)  throws EnteSportivoModelException {
+    	try {
+            String codiceFiscale="";
+			PreparedStatement preparedStatement = this.jdbcConnectionToDatabase
+					.prepareStatement(QueryCatalog.selectNumeroGareIscritteByCodiceFiscale);
+			
+			preparedStatement.setString(1, codiceFiscale);
+			 ResultSet resultSet = preparedStatement.executeQuery();
+	        	        
     
+			}
+
+		 catch (SQLException sqlException) {
+
+			throw new EnteSportivoModelException("IscrizioneDao -> loadIscrizioneDaoByInnerJoin -> " + sqlException.getMessage());
+		}
+
+ 
+    }
 	
 	
 	public void addIscrizione(Iscrizione iscrizione) throws EnteSportivoModelException {
 
 		try {
-
+            Trigger.checkLimiteIscrizioni(iscrizione);
+            
 			PreparedStatement preparedStatement = this.jdbcConnectionToDatabase
 					.prepareStatement(QueryCatalog.insertIscrizione);
 
