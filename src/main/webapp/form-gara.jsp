@@ -21,25 +21,24 @@
 	<body>
 	
         <center>
-            <h1> Iscrizione Gara </h1>
+            <h1> Nuova gara </h1>
         </center>
 		
-		<form action="/ente-sportivo/iscrizione" method="post">
+		<form action="/ente-sportivo/gara" method="post">
 		
-			<p>Per favore, indicare i dati per svolgere la gara  !!!.</p>
 			
-			<label for="codice_fiscale">Codice Fiscale</label>
+			
+			<label for="luogo">Luogo</label>
 			<br>
-			<input type="text" id="codice_fiscale" name="codice_fiscale" minlength="16" maxlength="16" value=""   />
-	        <c:set var="idgara" value='${requestScope["id-gara"]}' />    
-	        
-		     <input type="hidden" id="id-gara"	name="id-gara" value="<c:out value="${idgara}" />"  />
+			<input type="text" id="luogo" name="luogo" value=""   />
        
-      
+            <label for="data"></label>
+			<br>Data e Ora<br>
+			<input type="datetime-local" id="data" name="data-gara" value=""   />
         
             
 			
-			<input type="submit"  style="color:green;" value="iscriviti">
+			<input type="submit" style="color:orange;" value="nuovo">
 			
 		</form>
   

@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -12,8 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.generation.italy.JDBC_ente_sportivo.model.EnteSportivoModelException;
-import org.generation.italy.JDBC_ente_sportivo.model.entity.Gara;
 import org.generation.italy.JDBC_ente_sportivo.model.entity.Iscrizione;
+import org.generation.italy.JDBC_ente_sportivo.model.entity.Velocista;
+import org.generation.italy.JDBC_ente_sportivo.model.entity.VelocistaIscrizioneGara;
 
 public class IscrizioneDao extends ADao {
 
@@ -134,7 +134,61 @@ public class IscrizioneDao extends ADao {
 		}
 
  
+    	
+    	
+    	
     }
+    
+    
+    public List<VelocistaIscrizioneGara> loadVelocistiIscrittiGara(Long idGara) throws EnteSportivoModelException {
+        Velocista velocista = null;
+
+		List<VelocistaIscrizioneGara> elencoVelocistiIscrittiGara = new ArrayList<VelocistaIscrizioneGara>();
+
+		try {
+          
+			PreparedStatement preparedStatement = this.jdbcConnectionToDatabase
+					.prepareStatement(QueryCatalog.selectFromIscrizioneInnerJoinVelocista);
+			
+			
+			
+			preparedStatement.setLong(1, idGara);
+			
+			System.out.println(QueryCatalog.selectFromIscrizioneInnerJoinVelocista);
+			
+			ResultSet rsSelect = preparedStatement.executeQuery();
+
+			while (rsSelect.next()) {  // usare per due metodi 
+
+				
+				int eta = rsSelect.getInt("eta");
+				if (rsSelect.wasNull()) {
+					eta = 0;
+				}
+
+			
+
+				String nominativo = rsSelect.getString("nominativo");
+				if (rsSelect.wasNull()) {
+					nominativo = "";
+
+				}
+										
+				VelocistaIscrizioneGara velocistaIscrittoGara = new VelocistaIscrizioneGara(nominativo, eta);
+			    elencoVelocistiIscrittiGara.add(velocistaIscrittoGara);
+		//	elencoVelocistiPartecipantiGara = loadVelocistaByQuery(preparedStatement);
+
+			
+
+			}
+
+		} catch (SQLException sqlException) {
+
+			throw new EnteSportivoModelException("VelocistaDao -> loadVelocistaInnerJoin -> " + sqlException.getMessage());
+		}
+
+		return elencoVelocistiIscrittiGara;
+	}
 	
 	
 	public void addIscrizione(Iscrizione iscrizione) throws EnteSportivoModelException {
@@ -157,4 +211,29 @@ public class IscrizioneDao extends ADao {
 
 		}
 	}
+	
+public void removeIscrizioneVelocista(String nominativo,Long idGara) throws EnteSportivoModelException{
+
+	
+	try {
+		
+
+		PreparedStatement preparedStatement = this.jdbcConnectionToDatabase
+				.prepareStatement(QueryCatalog.deleteIscrizione);
+
+		preparedStatement.setLong(1, idGara);
+		preparedStatement.setString(2, nominativo);
+
+	     System.out.println(QueryCatalog.deleteIscrizione);
+
+		preparedStatement.executeUpdate();
+
+	}catch (SQLException sqlException) {
+
+		throw new EnteSportivoModelException("GaraDao -> deleteIscrizione  -> " + sqlException.getMessage());
+
+	}
+
+	
+}
 }

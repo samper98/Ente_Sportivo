@@ -23,6 +23,14 @@ public class VelocistaPartecipanteGara {
 	}
 
 	
+	public VelocistaPartecipanteGara(String nominativo, Integer eta, Float tempo) {
+		super();
+		this.nominativo = nominativo;
+		this.eta = eta;
+		this.tempo = tempo;
+	}
+
+
 	public String getNominativo() {
 		return nominativo;
 	}

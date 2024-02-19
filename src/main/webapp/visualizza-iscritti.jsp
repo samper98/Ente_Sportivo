@@ -19,28 +19,39 @@
 </head>
 	</div>
 	<caption>
-		<h2>Lista Partecipanti </h2>
+		<h2>Lista Iscritti </h2>
 	</caption>
 	<div align="center">
 		<table class="table" border="1" cellpadding="5">
 		
           <c:set var="idgara" value='${requestScope["id-gara"]}' />    
-	     
+	      <c:set var="lista" value='${requestScope["listaIscritti"]}' />
+<%-- 	    _<c:out value="${lista.size()!= 0}"/> --%>
+			<c:if test="${lista.size()!= 0}">
 			<tr>
 				<th>Nominativo</th>
 				<th>Eta</th>
-			    <th>Tempo</th>	
 			</tr>
-			<c:forEach var="VelocistaPartecipantiGara" items="${listaPartecipanti}">
+			
+			<c:forEach var="velocistaIscrittiGara" items="${lista}">
+			
 					<tr>
-						<td><c:out value="${VelocistaPartecipantiGara.nominativo}" /></td>
-						<td><c:out value="${VelocistaPartecipantiGara.eta}" /></td>
-						<td><c:out value="${VelocistaPartecipantiGara.tempo}" /></td>
+						<td><c:out value="${velocistaIscrittiGara.nominativo}" /></td>
+						<td><c:out value="${velocistaIscrittiGara.eta}" /></td>
+						
 						
 					</tr>
 			</c:forEach>
+			</c:if>
 			
 		</table>
-				<td><a class="btn btn-success" href=/ente-sportivo/homepage-velocista />  TORNA ALLA HOME  </a></td>
+	<c:if test="${lista.size()== 0}">
+	
+	<h3><strong style="color: red;" >Non ci sono iscritti per la gara selezionata</strong></h3>
+		
+	</c:if>	
+						<a class="btn btn-success" href=/ente-sportivo/homepage-velocista />  TORNA ALLA HOME  </a>
+		
+		
 		
 	</div>

@@ -19,6 +19,7 @@
             <h1>Messaggio esito azione</h1>
         </center>
 		<%=(String) request.getAttribute("message-to-show")%>
-		<td><a class="btn btn-success" href=/ente-sportivo/homepage-velocista />  TORNA ALLA HOME  </a></td>
+	 <br>	
+		<td><a class="btn btn-success" style="background-color:orange;" href=/ente-sportivo/homepage-staff-gara>  TORNA ALLA HOME  </a></td>
 	</body>
 </html>

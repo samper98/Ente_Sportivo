@@ -57,12 +57,24 @@ public class QueryCatalog {
 		    " INNER JOIN gara ON partecipazione.id_gara = gara.id_gara " +
 		    " WHERE gara.id_gara = ? ";
 	
+	
+	public static final String selectFromIscrioneeInnerJoinVelocista =
+		    " SELECT velocista.nominativo, velocista.eta " +
+		    " FROM iscrizione " +
+		    " INNER JOIN velocista ON iscrizione.codice_fiscale = velocista.codice_fiscale " +
+		    " INNER JOIN gara ON iscrizione.id_gara = gara.id_gara " +
+		    " WHERE gara.id_gara = ? ";
+	
 	public static final String selectNumeroGareIscritteByCodiceFiscale =
 			" SELECT   COUNT (iscrizione.id_gara) as nr_gare_iscritte" +
 			" FROM iscrizione " +
 			" WHERE  iscrizione.codice_fiscale = ?"  ;
 	
+  public static final String selectGaraOrderByDataAndOra =
 
+            " SELECT * " +
+            "FROM gara " +
+            "ORDER BY gara.data_ora_gara " ; 
 	 /////////////////////////// INSERT ///////////////////////////
 	
 	public static final String insertGara = 
@@ -79,6 +91,30 @@ public class QueryCatalog {
 	
 	
 	
+	////////////////////////// UPDATE ////////////////////////
 	
+	public static final String updateGara =
+			" UPDATE gara " +
+		  " SET " + 
+		"	gara.luogo  = ? , " +
+		" gara.data_ora_gara = ? " +
+		" where gara.id_gara =  ?  " ;
+	
+	
+	
+	//////////////////////////DELETE //////////////////////
+	public static final String deleteGara=
+	" DELETE  " +
+	" FROM gara " + 
+	 " WHERE gara.id_gara = ? " ;
+	
+	public static final String deleteIscrizione=
+			" DELETE iscrizione " +
+			" FROM iscrizione " +
+			" INNER JOIN velocista ON iscrizione.codice_fiscale = velocista.codice_fiscale " +
+			" INNER JOIN gara ON iscrizione.id_gara = gara.id_gara " +
+			" WHERE gara.id_gara = ? " +
+			" AND velocista.nominativo = ? "  ;
+
 }
 

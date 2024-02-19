@@ -143,7 +143,31 @@ public class GaraDao extends ADao {
 
 		return elencoGara;
 	}
-	
+	public List<Gara> loadGaraByDataAndOra() throws EnteSportivoModelException {
+
+		Gara Gara = null;
+
+		List<Gara> elencoGara = new ArrayList<Gara>();
+
+		try {
+
+			PreparedStatement preparedStatement = this.jdbcConnectionToDatabase
+					.prepareStatement(QueryCatalog.selectGaraOrderByDataAndOra);
+
+			elencoGara = loadGaraByQuery(preparedStatement);
+
+			if (elencoGara.size() == 1) {
+				Gara = elencoGara.get(0);
+
+			}
+
+		} catch (SQLException sqlException) {
+
+			throw new EnteSportivoModelException("GaraDao -> loadElencoGara -> " + sqlException.getMessage());
+		}
+
+		return elencoGara;
+	}
 	
 //	
 //	 public List<Gara> loadVelocistiPartecipanti(Long idGara) throws EnteSportivoModelException {
@@ -197,4 +221,47 @@ public class GaraDao extends ADao {
 
 		}
 	}
+	
+	public void updateGara (Gara gara) throws EnteSportivoModelException{
+	   
+		try
+		{
+			PreparedStatement preparedStatement = this.jdbcConnectionToDatabase
+					.prepareStatement(QueryCatalog.updateGara);
+			preparedStatement.setString(1, gara.getLuogo());
+			preparedStatement.setTimestamp(2, Timestamp.valueOf(gara.getDataGara()));
+			preparedStatement.setLong(3, gara.getIdGara());
+		
+			preparedStatement.executeUpdate();
+
+		}catch (SQLException sqlException) {
+
+			throw new EnteSportivoModelException("GaraDao -> updateGara  -> " + sqlException.getMessage());
+		}
+
+		}
+		
+		public void  deleteGara (Long idGara)   throws EnteSportivoModelException{
+			Gara Gara = null;
+		try {
+			
+			List<Gara> elencoGara = new ArrayList<Gara>();
+
+			PreparedStatement preparedStatement = this.jdbcConnectionToDatabase
+					.prepareStatement(QueryCatalog.deleteGara);
+
+			preparedStatement.setLong(1, idGara);
+
+			elencoGara = loadGaraByQuery(preparedStatement);
+
+			if (elencoGara.size() == 1) {
+				Gara = elencoGara.get(0);
+			}
+
+		}catch (SQLException sqlException) {
+
+			throw new EnteSportivoModelException("GaraDao -> deleteGara  -> " + sqlException.getMessage());
+
+		}
+		}
 }

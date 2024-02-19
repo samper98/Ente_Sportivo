@@ -43,7 +43,9 @@ public class PartecipazioneDao extends ADao {
 				if (rsSelect.wasNull()) {
 					idGara = (long) 0;		
 				}
-								
+				
+			Partecipazione partecipazione = new Partecipazione (codiceFiscale,idGara,tempo);
+			elencoPartecipazione.add(partecipazione);
 			}
 
 		} catch (SQLException sqlException) {
@@ -86,7 +88,6 @@ public class PartecipazioneDao extends ADao {
 				}
 
 				
-				
 				Float tempo = rsSelect.getFloat("tempo");
 				if (rsSelect.wasNull()) {
 					tempo = 0f;
@@ -98,8 +99,8 @@ public class PartecipazioneDao extends ADao {
 
 				}
 										
-				
-			
+				VelocistaPartecipanteGara velocistaPartecipanteGara = new VelocistaPartecipanteGara( nominativo, eta, tempo);
+			    elencoVelocistiPartecipantiGara.add(velocistaPartecipanteGara);
 		//	elencoVelocistiPartecipantiGara = loadVelocistaByQuery(preparedStatement);
 
 			

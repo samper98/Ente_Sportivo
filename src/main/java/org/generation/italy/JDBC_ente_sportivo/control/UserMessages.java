@@ -13,5 +13,14 @@ public class UserMessages {
    
 	public static final String msgEsitoOkIscrizione ="Iscrizione effettuata";
 	public static final String msgErroreIscrizione =" Errore nei dati inseriti ";
+	
+	public static final String msgEsitoOkGara ="Nuova gara inserita";
+	public static final String msgErroreGara ="Errore nei dati inseriti";
+	
+    public static final String msgEsitoOkModificaDatiGara="Le modifiche effettuate per la gara scelta sono state fatte";
+    public static final String msgErroreModificaGara ="Errore nei dati inseriti";
+    
+    public static final String msgErroreEliminazioneGara ="Non puoi eliminare questa gara, assicurati prima di eliminare tutte le iscrizioni qui presenti ";
+  public  static final String msgOkEliminazione = "Eliminazione gara andata a buon fine ";
 }
 ///
